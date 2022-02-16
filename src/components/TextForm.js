@@ -2,13 +2,11 @@ import React, { useState } from "react";
 
 export default function TextForm(props) {
   const handleUpClick = () => {
-    // console.log("uppercase was clicked"+ text);
     let newText = text.toUpperCase();
     setText(newText);
     props.showAlert("Converted to Uppercase", "success");
   };
   const handleLowClick = () => {
-    // console.log("lowercase was clicked"+ text);
     let newText = text.toLowerCase();
     setText(newText);
     props.showAlert("Converted to Lowercase", "success");
@@ -19,10 +17,7 @@ export default function TextForm(props) {
     props.showAlert("Text has been cleared", "success");
   };
   const handleCopy = () => {
-    var text = document.getElementById("myBox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
-    document.getSelection().removeAllRanges();
+    navigator.clipboard.writeText(text);
     props.showAlert("Text has been copied", "success");
   };
   const handleExtraSpaces = () => {
@@ -76,9 +71,8 @@ export default function TextForm(props) {
         style={{ color: props.mode === "dark" ? "white" : "#043762" }}
       >
         <h2>Your text summary</h2>
-        <p>
-          {
-            text.split(" ").filter((element) => {
+        <p>{
+            text.split(/\s+/).filter((element) => {
               return element.length !== 0;
             }).length}{" "} words, {text.length} characters
         </p>
